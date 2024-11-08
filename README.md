@@ -7,6 +7,7 @@ The primary challenge in developing TagPlay was designing adaptive enemy AI that
 ---------------------
 
 "Key Focus Areas"
+
 Significant effort was invested in:
 
 Dynamic Ball Spawning System: Developed a custom spawning mechanism that adjusts in real time to create unpredictable and challenging scenarios, ensuring continuous engagement and balanced difficulty as the player progresses.
