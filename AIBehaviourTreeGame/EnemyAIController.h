@@ -1,15 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
-#include "Ball.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Ball.h"
 #include "EnemyAIController.generated.h"
 
-/**
- * 
- */
 struct FAivState : public TSharedFromThis<FAivState>
 {
 private:
@@ -71,12 +68,13 @@ public:
 	}
 };
 
-
+/**
+ *
+ */
 UCLASS()
-class LEPALLE_API AEnemyAIController : public AAIController
+class AIBEHAVIOURTREEGAME_API AEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
-
 
 protected:
 	TSharedPtr<FAivState> CurrentState;
@@ -84,10 +82,13 @@ protected:
 	TSharedPtr<FAivState> GoToBall;
 	TSharedPtr<FAivState> GrabBall;
 	TSharedPtr<FAivState> SearchForBall;
+	TSharedPtr<FAivState> WaitForBall;
+
+	const float TimeValue = 0.5f;
+	float Count;
 
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 
 	ABall* BestBall;
-	
 };

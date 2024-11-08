@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class LePalle : ModuleRules
+public class AIBehaviourTreeGame : ModuleRules
 {
-	public LePalle(ReadOnlyTargetRules Target) : base(Target)
+	public AIBehaviourTreeGame(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 

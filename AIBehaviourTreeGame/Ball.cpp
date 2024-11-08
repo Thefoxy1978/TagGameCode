@@ -6,7 +6,7 @@
 // Sets default values
 ABall::ABall()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BallMesh"));
 	SetRootComponent(BallMesh);
@@ -16,7 +16,7 @@ ABall::ABall()
 void ABall::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 }
 
 // Called every frame

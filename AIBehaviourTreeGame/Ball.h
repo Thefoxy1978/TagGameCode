@@ -7,11 +7,11 @@
 #include "Ball.generated.h"
 
 UCLASS()
-class LEPALLE_API ABall : public AActor
+class AIBEHAVIOURTREEGAME_API ABall : public AActor
 {
 	GENERATED_BODY()
-
-public:
+	
+public:	
 	// Sets default values for this actor's properties
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* BallMesh;
@@ -22,8 +22,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+
 
 };

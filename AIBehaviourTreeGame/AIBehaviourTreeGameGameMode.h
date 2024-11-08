@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "LePalleGameMode.generated.h"
+#include "AIBehaviourTreeGameGameMode.generated.h"
 
 UCLASS(minimalapi)
-class ALePalleGameMode : public AGameModeBase
+class AAIBehaviourTreeGameGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
@@ -18,12 +18,13 @@ protected:
 	void ResetMatch();
 
 public:
-	ALePalleGameMode();
+	AAIBehaviourTreeGameGameMode();
 
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 
 	const TArray<class ABall*>& GetBalls() const;
+
 };
 
 

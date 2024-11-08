@@ -1,13 +1,13 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "LePalleGameMode.h"
-#include "LePalleCharacter.h"
+#include "AIBehaviourTreeGameGameMode.h"
+#include "AIBehaviourTreeGameCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 #include "EngineUtils.h"
 #include "Ball.h"
 #include "Engine/TargetPoint.h"
 
-ALePalleGameMode::ALePalleGameMode()
+AAIBehaviourTreeGameGameMode::AAIBehaviourTreeGameGameMode()
 {
 	// set default pawn class to our Blueprinted character
 	PrimaryActorTick.bCanEverTick = true;
@@ -18,34 +18,34 @@ ALePalleGameMode::ALePalleGameMode()
 	}
 }
 
-void ALePalleGameMode::BeginPlay()
+void AAIBehaviourTreeGameGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
 	ResetMatch();
 }
 
-void ALePalleGameMode::Tick(float DeltaTime)
+void AAIBehaviourTreeGameGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	/*for (int32 i = 0; i < gameballs.num(); i++)
+	for (int32 i = 0; i < GameBalls.Num(); i++)
 	{
-		if (gameballs[i]->getattachparentactor() != getworld()->getfirstplayercontroller()->getpawn())
+		if (GameBalls[i]->GetAttachParentActor() != GetWorld()->GetFirstPlayerController()->GetPawn()) 
 		{
 			return;
 		}
 	}
 
-	ResetMatch();*/
+	ResetMatch();
 }
 
-const TArray<class ABall*>& ALePalleGameMode::GetBalls() const
+const TArray<class ABall*>& AAIBehaviourTreeGameGameMode::GetBalls() const
 {
 	return GameBalls;
 }
 
-void ALePalleGameMode::ResetMatch()
+void AAIBehaviourTreeGameGameMode::ResetMatch()
 {
 
 	TargetPoints.Empty();
@@ -58,10 +58,10 @@ void ALePalleGameMode::ResetMatch()
 
 	for (TActorIterator<ABall> It(GetWorld()); It; ++It)
 	{
-		/*if (It->GetAttachParentActor())
+		if (It->GetAttachParentActor())
 		{
-			It->AttachToActor(nullptr, FAttachmentTransformRules::KeepWorldTransform);
-		}*/
+			It->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		}
 
 		GameBalls.Add(*It);
 	}
@@ -75,5 +75,5 @@ void ALePalleGameMode::ResetMatch()
 		RandomTargetPoints.RemoveAt(RandomTargetIndex);
 	}
 
-
+	
 }

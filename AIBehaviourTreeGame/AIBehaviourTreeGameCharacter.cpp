@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "LePalleCharacter.h"
+#include "AIBehaviourTreeGameCharacter.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -14,9 +14,9 @@
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
-// ALePalleCharacter
+// AAIBehaviourTreeGameCharacter
 
-ALePalleCharacter::ALePalleCharacter()
+AAIBehaviourTreeGameCharacter::AAIBehaviourTreeGameCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -54,7 +54,7 @@ ALePalleCharacter::ALePalleCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
-void ALePalleCharacter::BeginPlay()
+void AAIBehaviourTreeGameCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
@@ -72,7 +72,7 @@ void ALePalleCharacter::BeginPlay()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void ALePalleCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AAIBehaviourTreeGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
@@ -82,10 +82,10 @@ void ALePalleCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ALePalleCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAIBehaviourTreeGameCharacter::Move);
 
 		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ALePalleCharacter::Look);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAIBehaviourTreeGameCharacter::Look);
 	}
 	else
 	{
@@ -93,7 +93,7 @@ void ALePalleCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	}
 }
 
-void ALePalleCharacter::Move(const FInputActionValue& Value)
+void AAIBehaviourTreeGameCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -116,7 +116,7 @@ void ALePalleCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
-void ALePalleCharacter::Look(const FInputActionValue& Value)
+void AAIBehaviourTreeGameCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();

@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class LePalleTarget : TargetRules
+public class AIBehaviourTreeGameTarget : TargetRules
 {
-	public LePalleTarget(TargetInfo Target) : base(Target)
+	public AIBehaviourTreeGameTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V4;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3;
-		ExtraModuleNames.Add("LePalle");
+		ExtraModuleNames.Add("AIBehaviourTreeGame");
 	}
 }

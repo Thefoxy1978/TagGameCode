@@ -1,9 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "EnemyAIController.h"
 #include "Navigation/PathFollowingComponent.h"
-#include "LePalleGameMode.h"
+#include "AIBehaviourTreeGameGameMode.h"
 
 void AEnemyAIController::BeginPlay()
 {
@@ -35,7 +32,7 @@ void AEnemyAIController::BeginPlay()
 	SearchForBall = MakeShared<FAivState>(
 		[this](AAIController* AIController) {
 			AGameModeBase* GameMode = AIController->GetWorld()->GetAuthGameMode();
-			ALePalleGameMode* AIGameMode = Cast<ALePalleGameMode>(GameMode);
+			AAIBehaviourTreeGameGameMode* AIGameMode = Cast<AAIBehaviourTreeGameGameMode>(GameMode);
 			const TArray<ABall*>& BallsList = AIGameMode->GetBalls();
 
 			ABall* NearestBall = nullptr;
@@ -59,9 +56,11 @@ void AEnemyAIController::BeginPlay()
 			{
 				return GoToBall;
 			}
-			else {
-				return SearchForBall;
+			else
+			{
+				return WaitForBall;
 			}
+            
 		}
 	);
 
@@ -104,9 +103,31 @@ void AEnemyAIController::BeginPlay()
 		}
 	);
 
+	WaitForBall = MakeShared<FAivState>(
+		[this](AAIController* AIController)
+		{
+			Count = 0.f;
+		},
+		nullptr,
+		[this](AAIController* AIController, const float DeltaTime) -> TSharedPtr<FAivState> {
+
+			Count = DeltaTime + Count;
+			
+			if (Count >= TimeValue)
+			{
+				return SearchForBall;
+			}
+
+			return WaitForBall;
+		}
+	);
+
+
 	CurrentState = SearchForBall;
 	CurrentState->CallEnter(this);
 }
+
+
 
 void AEnemyAIController::Tick(float DeltaTime)
 {
