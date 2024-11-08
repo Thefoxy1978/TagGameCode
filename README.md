@@ -15,8 +15,6 @@ AI Behavior Design: Implemented advanced AI routines that allow enemy characters
 
 ---------------------
 
-Original git:
-
 Video: TO DO
 
 Exe: TO DO
